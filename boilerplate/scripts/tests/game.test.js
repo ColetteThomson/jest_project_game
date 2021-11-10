@@ -1,7 +1,3 @@
-/**
- * @jest-environment jsdom
- */
-
 //standard text 
 const { beforeAll } = require("jest-circus");
 
@@ -15,4 +11,13 @@ const { beforeAll } = require("jest-circus");
      document.open();
      document.write(fileContents);
      document.close();
- })
+ });
+ 
+ //1st failing test to check if score key exists.  separate into blocks using 'describe'
+ describe("game object contains correct keys", () => {
+    //test 1: if game object contains a key called score 
+    test("score key exists", () => {
+        //so expect score to be in game
+         expect("score" in game).toBe(true);
+     })
+ }); //run: npm test  - after each 'test' block
