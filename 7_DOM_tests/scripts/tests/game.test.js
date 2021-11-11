@@ -53,9 +53,12 @@
      test("should add one move to the computer's game array", () => {
          expect(game.currentGame.length).toBe(1);
      });
+     // test to fail because haven't attached event listeners yet
      test("expect data-listener to be true", () => {
          newGame();
+         // get all elements with class of 'circle'
          const elements = document.getElementsByClassName("circle");
+         // then loop through each of these elements and expect data-listener to be set to true
          for (let element of elements) {
              expect(element.getAttribute("data-listener")).toEqual("true");
          }
@@ -89,3 +92,17 @@
          expect(game.turnNumber).toBe(0);
      });
  });
+
+ /* let's just stop for a moment  and take stock of where we are. 
+The majority of the computer-controlled  side of our game is working,  
+we've built an object to start global  state and functions to start a new game,  
+add random selections to the sequence  and show the sequence for us to copy.  
+What we don't have is any form of user input.  In short, we can't actually play the game.
+In this video, we're going to add  an event listener to each circle,  
+so that we can check what the player has clicked  on. But we have an issue. There's no standard,  
+cross-browser way of testing if an  event listener has been attached.  
+Now this might seem like a massive oversight,  but it's true. Like so many things in JavaScript,  
+we encounter it, scratch our heads and  then try to figure out a way around it. 
+And that's where the data listener custom attribute in index.html comes in. 
+So is currently set to 'false', will set to 'true' for testing purposes
+*/ 
