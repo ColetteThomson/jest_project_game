@@ -21,10 +21,15 @@ function addTurn() {
 }
 
 function showTurns() {
+    // set turnNumber to zero, then use that as the array index number for game.currentGame array
     game.turnNumber = 0;
+    // calling the lightsOn function inside a JavaScript setInterval - which just makes sure 
+    //- that we have a little pause between the lights being  shown and the next step in the sequence.
     let turns = setInterval(function () {
         lightsOn(game.currentGame[game.turnNumber]);
         game.turnNumber++;
+        // added an if statement inside  here, as well that if our turnNumber is equal or over the 
+        //- length of our current game array, then obviously, the sequence is finished so we can clear our interval.
         if (game.turnNumber >= game.currentGame.length) {
             clearInterval(turns);
         }
