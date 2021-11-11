@@ -101,6 +101,9 @@
          lightsOn(game.currentGame[0]);
          expect(button.classList).toContain("light");
      });
+     /* expecting turnInProgress to be true while the computer is showing  its turns */
+     /* fails because we expected true, but what we actually  got was 'undefined'. Because showTurns
+     isn't doing anything with our turnInProgress key at all */
      test("should toggle turnInProgress to true", () => {
          showTurns();
          expect(game.turnInProgress).toBe(true);
@@ -115,6 +118,17 @@
          playerTurn();
          expect(game.score).toBe(1);
      });
+     /* what about if we click a button  during the computer sequence? 
+Well let's add the test to see if  the last button value is being set.
+Now remember that last button stores the value  of the last button was clicked. So what we're  
+going to do is create a new test here to say that  clicking during the computer sequence should fail.
+The first thing that I want  to do is start the computer sequence by calling the showTurns function.
+Then, I'm going to reset the game.last button key  so that it should be empty. Now, when I call the  
+click function on one of our buttons I'm going  to choose button 2 here, then it should not set  
+a value of game.lastButton, there should be  no ID in there if my clicks are disabled.
+So in other words, the contents of last  button shouldn't change after we clear it,  
+if clicks are disabled. */
+// test will fail because buttons are not being clicked
      test("clicking during computer sequence should fail", () => {
          showTurns();
          game.lastButton = "";
@@ -123,3 +137,13 @@
      });
  });
  
+
+ /* NOTE:  So let's summarize, what have we learned?
+Well we've looked at the  principles of software testing,  
+and we've learned about test-driven development,  you've seen how to test the DOM and DOM events,  
+and how to expose values from functions to make  them testable; even if they don't return a value.
+Finally, you've seen how even a small project  can be made more robust with comprehensive tests,  
+even if you don't choose to follow a  strict TDD process in your projects,  
+it's good to be aware of it for  when you're being interviewed. 
+If you go on to study Devops you'll see how  tests are a key part of it and how you can  
+automate deployments, so that your projects  will only deploy if all the tests are passing.  */
