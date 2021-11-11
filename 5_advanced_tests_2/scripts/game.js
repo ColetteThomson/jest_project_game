@@ -18,9 +18,10 @@ function addTurn() {
     game.currentGame.push(game.choices[(Math.floor(Math.random() * 4))]);
     // showTurns();
 }
-
+//going to call lightsOn with the id of one of the circles (circ)
 function lightsOn(circ) {
     document.getElementById(circ).classList.add(circ + "light");
+    //use JS's setTimeout function to remove the light class after 400 ms
     setTimeout(function () {
         document.getElementById(circ).classList.remove(circ + "light");
     }, 400);
