@@ -2,8 +2,13 @@
  * @jest-environment jsdom
  */
 
- const { game, newGame, showScore, addTurn, lightsOn, showTurns, playerTurn } = require("../game");
+ const { getSystemErrorMap } = require("util");
+const { game, newGame, showScore, addTurn, lightsOn, showTurns, playerTurn } = require("../game");
 
+ /* what if the player makes a wrong move?  can actually use Jest to  check if an alert has been called.
+To do this, we use something called a spy - which will wait and only report when it sees  
+some interesting activity. first argument to spyOn is the window and  the second is the name of the method, 
+in this case "alert"  */
  jest.spyOn(window, "alert").mockImplementation(() => { });
  
  beforeAll(() => {
@@ -101,10 +106,22 @@
          showTurns();
          expect(game.turnNumber).toBe(0);
      });
+     /* in the beforeEach  function for our gameplay, we're adding one turn.
+    so we're going to take that turn and  we're going to push it into the playerMoves array  
+    before calling playerTurn. That way we know that  we have a correct answer because the playerTurn  
+    and the computersTurn match each other.  */
+    // test will fail because playerTurn is not yet defined
      test("should increment the score if the turn is correct", () => {
          game.playerMoves.push(game.currentGame[0]);
          playerTurn();
+         // expect score to have increased
          expect(game.score).toBe(1);
+     });
+     // test will fail because alert was never called, i.e. number of calls is zero
+     test("should call an alert if the move is wrong", () => {
+         game.playerMoves.push("wrong");
+         playerTurn();
+         expect(window.alert).toBeCalledWith("Wrong move!");
      });
      test("clicking during computer sequence should fail", () => {
          showTurns();

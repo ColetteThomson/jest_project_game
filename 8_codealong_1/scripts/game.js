@@ -50,15 +50,28 @@ function lightsOn(circ) {
     }, 400);
 }
 
+/* playerTurn function should check if the player's move matches the move in the computer sequence. 
+And if so,  then we want to keep running through the computer sequence and checking that with the 
+player's turn.   If we've got to the end of the computer sequence, then we want to add another turn, 
+increment  the score, and start the whole thing again.  If the move is wrong, we'll need to  display 
+an alert to warn the user.*/
 function playerTurn() {
     let i = game.playerMoves.length - 1;
+    /* get the index  of the last element from our playerMoves array - because what we're going to do 
+    is compare that  with the same index in the current game array, if our player gets the answers  
+    correct then these two should match. This is convenient because it means that we can  just compare 
+    elements at the same index number.   */
     if (game.currentGame[i] === game.playerMoves[i]) {
+       /* if the length of  our current game array is equal to the length of our player moves, then we 
+       must be at the end of  the sequence. And the player got them all correct. */ 
         if (game.currentGame.length === game.playerMoves.length) {
+            /*  increment  the score and to add a new turn */
             game.score++;
             showScore();
             addTurn();
         }
     } else {
+        // ties in with test 'should call an alert if the move is wrong'
         alert("Wrong move!");
         newGame();
     }
