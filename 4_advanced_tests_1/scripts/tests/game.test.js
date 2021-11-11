@@ -48,6 +48,8 @@
          expect(game.playerMoves.length).toBe(0);
      });
      test("should add one move to the computer's game array", () => {
+         //(1)...because it will contain one move that's been pushed into it
+         //- so will fail because currently has length of 0
          expect(game.currentGame.length).toBe(1);
      });
  });
