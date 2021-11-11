@@ -17,7 +17,7 @@ const { beforeAll } = require("jest-circus");
  describe("game object contains correct keys", () => {
     //test 1: if game object contains a key called score 
     test("score key exists", () => {
-        //so expect score to be in game
+        //so expect score to be in game - is not so test will fail
          expect("score" in game).toBe(true);
      })
  }); //run: npm test  - after each 'test' block
